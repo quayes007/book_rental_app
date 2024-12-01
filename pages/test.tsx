@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function Page(props: Props) {
     return(
         <main>
-            Hello, health is OK! Test user - {props.user.first_name}
+            Hello, health is OK! Test user - {props.user.firstName}
         </main>
     )
 }
