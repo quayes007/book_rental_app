@@ -41,17 +41,25 @@ model User {
 }
 
 model BookGeneres {
-  id               Int           @id @default(autoincrement())
-  name             String
-  shortDescription String
+  id               Int           @id @default(autoincrement())  // Unique ID for each genre
+  name             String        // Name of the genre or subgenre
+  shortDescription String        // Short description of the genre or subgenre
+  parentId         Int?          // Foreign key for the parent genre (nullable if it's a top-level genre)
+  
+  // Relation to the parent genre, if it's a subgenre
   parent           BookGeneres?  @relation("SubGeneres", fields: [parentId], references: [id])
-  parentId         Int?
-  createdBy        User?         @relation("GenereCreatedBy", fields: [createdById], references: [id])
-  createdById      Int?
-  createdAt        DateTime      @default(now())
-  updatedAt        DateTime      @updatedAt
-  Book             Book[]
-  subGeneres       BookGeneres[] @relation("SubGeneres")
+
+  // Relation to subgenres, if the genre has subgenres
+  subGeneres       BookGeneres[] @relation("SubGeneres")  // Subgenres of the current genre
+
+  createdBy        User?         @relation("GenereCreatedBy", fields: [createdById], references: [id]) // Creator of the genre
+  createdById      Int?          // Foreign key for the user who created this genre
+
+  createdAt        DateTime      @default(now())  // Timestamp of creation
+  updatedAt        DateTime      @updatedAt        // Timestamp of last update
+
+  Book             Book[]        // Relation to the Book model, where books belong to this genre
+  
 }
 
 model Book {
