@@ -38,6 +38,7 @@ model User {
   createdBookGenres BookGeneres[] @relation("GenereCreatedBy")
   phoneNumber String @unique
   accountType AccountType
+  preferences  String[]
 }
 
 model BookGeneres {
