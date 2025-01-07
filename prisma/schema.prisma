@@ -12,6 +12,17 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+enum Role {
+  general_user
+  admin
+}
+
+enum AccountType {
+  borrower
+  renter
+  seller
+  all
+}
 
 model User {
   id                Int           @id @default(autoincrement())
@@ -25,6 +36,8 @@ model User {
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @default(now()) @updatedAt
   createdBookGenres BookGeneres[] @relation("GenereCreatedBy")
+  phoneNumber String @unique
+  accountType AccountType
 }
 
 model BookGeneres {
