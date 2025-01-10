@@ -2,6 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { middleware } from "../../../../middleware"; // Adjust path as needed
 import jwt from 'jsonwebtoken';
+import { BookListSerializer } from "./serializer/book";
 
 interface EncodeData {
   id: number,
@@ -59,3 +60,46 @@ export const POST = async (req: NextRequest) => {
     });
   }
 };
+
+export const GET = async (req: Request) => {
+  try{
+    const url = new URL(req.url);
+    const forRent = url.searchParams.get('for_rent') === 'true';
+    // const availableForSell = url.searchParams.get('available_for_sell') === 'true';
+
+    if(forRent){
+      const books = await prisma.book.findMany({
+        where: { forRent: true },
+        include: {
+          user: true,
+          bookGeneres: true,
+        },
+      });
+      return NextResponse.json({
+        message: "Books for rent",
+        code: 200,
+        data: BookListSerializer(books)
+      });
+    }else{
+      const books = await prisma.book.findMany({
+        where: { availableForSell: true },
+        include: {
+          user: true,
+          bookGeneres: true,
+        },
+      });
+      return NextResponse.json({
+        message: "Books for sale",
+        code: 200,
+        data: BookListSerializer(books)
+      });
+    }
+
+  }catch(error: any){
+    return NextResponse.json({
+      message: "Error " + error.message,
+      code: 500,
+      data: null
+    })
+  }
+}

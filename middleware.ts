@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const protectedPaths = [
-  { method: 'POST', path: '/api/v1/books' }
+  { method: 'POST', path: '/api/v1/books' },
+  { method: 'GET', path: '/api/v1/books'}
   // Add more protected routes as needed
 ];
 
