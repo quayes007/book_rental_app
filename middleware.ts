@@ -9,7 +9,6 @@ export const middleware = async (req: NextRequest) => {
   const isProtected = protectedPaths.some(route =>
     route.method === req.method && req.nextUrl.pathname.startsWith(protectedPaths[0].path)
   );
-  console.log("protected " + isProtected);
 
   if (!isProtected) {
     return NextResponse.next();

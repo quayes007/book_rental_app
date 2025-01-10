@@ -1,27 +1,27 @@
-import { prisma } from "@/lib/prisma"
-import { User } from "@prisma/client"
-import {  GetServerSideProps } from "next"
+// import { prisma } from "@/lib/prisma"
+// import { User } from "@prisma/client"
+// import {  GetServerSideProps } from "next"
 
-type Props = {
-    user: User
-}
+// type Props = {
+//     user: User
+// }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const user = await prisma.user.findFirst({
-        where: {
-            email: 'test@test.com'
-        }
-    })
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//     const user = await prisma.user.findFirst({
+//         where: {
+//             email: 'test@test.com'
+//         }
+//     })
 
-    return {
-        props: { user },
-    }
-}
+//     return {
+//         props: { user },
+//     }
+// }
 
-export default function Page(props: Props) {
-    return(
-        <main>
-            Hello, health is OK! Test user - {props.user.firstName}
-        </main>
-    )
-}
+// export default function Page(props: Props) {
+//     return(
+//         <main>
+//             Hello, health is OK! Test user - {props.user.firstName}
+//         </main>
+//     )
+// }
