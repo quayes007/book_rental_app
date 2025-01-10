@@ -4,7 +4,9 @@ import Image from "next/image";
 const OrderList = ({ item }) => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Latest Ordered Books</h2>
+      {
+        !item && (<h2 className={styles.title}>Latest Ordered Books</h2>) 
+      }
       <table className={styles.table}>
         <thead>
           <tr>
@@ -27,18 +29,18 @@ const OrderList = ({ item }) => {
                   height={40}
                   className={styles.userImage}
                 />
-                John Doe
+                {item?.user?.name || "John Doe"}
               </div>
             </td>
             <td>
-              Title
+              {item?.title || "Title"}
             </td>
-            <td>250</td>
-            <td>13</td>
-            <td>263</td>
+            <td>{item?.price || 250}</td>
+            <td>{item?.platformCost || 13}</td>
+            <td>{item?.totalCost || 263}</td>
             <td>
               <span className={`${styles.status} ${styles.pending}`}>
-                Processing
+                {item?.status || "Processing"}
               </span>
             </td>
           </tr>

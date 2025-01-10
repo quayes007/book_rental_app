@@ -4,7 +4,9 @@ import Image from "next/image";
 const Borrow = ({ item }) => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Latest Borrow Requests</h2>
+      {
+        !item && (<h2 className={styles.title}>Latest Ordered Books</h2>) 
+      }
       <table className={styles.table}>
         <thead>
           <tr>
@@ -27,18 +29,18 @@ const Borrow = ({ item }) => {
                   height={40}
                   className={styles.userImage}
                 />
-                John Doe
+                {item?.name || "John Doe"}
               </div>
             </td>
             <td>
-              Title
+              {item?.title || "Title" }
             </td>
-            <td>14.02.2025</td>
-            <td>18.02.2025</td>
-            <td>5</td>
+            <td>{item?.startDate || "14.02.2025"}</td>
+            <td>{item?.endDate || "18.02.2025"}</td>
+            <td>{item?.rentPerDay || "5"}</td>
             <td>
               <span className={`${styles.status} ${styles.pending}`}>
-                Processing
+                {item?.status || "Processing"}
               </span>
             </td>
           </tr>

@@ -6,14 +6,11 @@ import {
     MdDashboard,
     MdSupervisedUserCircle,
     MdShoppingBag,
-    MdAttachMoney,
-    MdWork,
-    MdAnalytics,
-    MdPeople,
     MdOutlineSettings,
     MdHelpCenter,
     MdLogout,
   } from "react-icons/md";
+import { FaBookOpen, FaBookReader } from "react-icons/fa";
 
 
 const menuItems = [
@@ -33,17 +30,17 @@ const menuItems = [
         {
           title: "Books",
           path: "/dashboard/books",
-          icon: <MdShoppingBag />,
+          icon: <FaBookOpen />,
         },
         {
           title: "Borrowed Book",
-          path: "/dashboard/borrowed",
-          icon: <MdAttachMoney />,
+          path: "/dashboard/borrow-list",
+          icon: <FaBookReader />,
         },
         {
             title: "Ordered Book",
-            path: "/dashboard/orders",
-            icon: <MdAttachMoney />,
+            path: "/dashboard/order-list",
+            icon: <MdShoppingBag />,
           },
       ],
     },
