@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Book" ADD COLUMN     "availableForSell" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "forRent" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "price" DECIMAL(65,30) NOT NULL DEFAULT 0.0,
+ADD COLUMN     "rentPerDay" DECIMAL(65,30) NOT NULL DEFAULT 0.0,
+ADD COLUMN     "subCategoryId" INTEGER[];
