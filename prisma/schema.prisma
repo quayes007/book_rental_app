@@ -25,7 +25,7 @@ enum AccountType {
 }
 
 enum STATUS {
-  processing
+  in_process
   on_the_way
   in_rent
   returning
@@ -49,6 +49,7 @@ model User {
   preferences  String[]
   borrowRequests BorrowRequest[]
   addresses Address[]
+  ordersBooks OrderBook[]
 }
 
 model BookGeneres {
@@ -92,6 +93,7 @@ model Book {
   rentPerDay Decimal @default(0.0)
   price Decimal @default(0.0)
   borrowRequests BorrowRequest[]
+  orderBooks OrderBook[]
 }
 
 model BorrowRequest {
@@ -106,8 +108,6 @@ model BorrowRequest {
   address     Address? 
   user        User      @relation(fields: [userId], references: [id])
   book        Book      @relation(fields: [bookId], references: [id])
-
-  @@unique([userId, bookId])
 }
 
 model OrderBook {
@@ -119,6 +119,9 @@ model OrderBook {
   status        STATUS 
   createdAt DateTime @default(now())
   updatedAt     DateTime    @updatedAt
+  user        User      @relation(fields: [userId], references: [id])
+  book        Book      @relation(fields: [bookId], references: [id])
+  address     Address? 
 }
 
 model Discussion {
@@ -144,15 +147,16 @@ model Address {
   id          Int           @id @default(autoincrement())
   userId       Int         
   street       String
-  city         String
+  city         String?
   district        String
   zipCode      String
-  latitude String
-  longitude String
+  latitude String?
+  longitude String?
   createdAt DateTime @default(now())
   updatedAt     DateTime    @updatedAt
   borrowRequestId Int? @unique
   borrowRequest   BorrowRequest? @relation(fields: [borrowRequestId], references: [id])
-  orderBookId Int?
+  orderBookId Int? @unique
   user        User      @relation(fields: [userId], references: [id])
+  orderBook   OrderBook? @relation(fields: [orderBookId], references: [id])
 }
