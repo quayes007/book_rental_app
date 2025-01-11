@@ -1,21 +1,24 @@
 import styles from "../../ui/dashboard/bookList/booList.module.css";
 import Borrow from "../../ui/dashboard/borrow/borrow";
+import { fetchBorrowedBooks } from "../../lib/data";
 
-const borrowedBooks = [
-    {
-        id: 1,
-        user: {
-            name: "Smith Doe"
-        },
-        title: "Book 1",
-        startDate: "14.02.2024",
-        endDate: "18.02.2024",
-        rentPerDay: 5,
-        status: "Completed"
-    }
-]
+// const borrowedBooks = [
+//     {
+//         id: 1,
+//         user: {
+//             name: "Smith Doe"
+//         },
+//         title: "Book 1",
+//         startDate: "14.02.2024",
+//         endDate: "18.02.2024",
+//         rentPerDay: 5,
+//         status: "Completed"
+//     }
+// ]
 
-const BorrowList = () => {
+const BorrowList = async() => {
+    const borrowedBooks = await fetchBorrowedBooks();
+
     return (
         <div className = {styles.container}>
             <div className={styles.top}>
@@ -27,7 +30,7 @@ const BorrowList = () => {
             </div>
             {
                 borrowedBooks.map((item) => (
-                    <Borrow key={item.id} item={item} />
+                    <Borrow key={item.id} item={item}/>
                 ))
             }
         </div>
