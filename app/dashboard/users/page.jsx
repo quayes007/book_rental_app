@@ -1,32 +1,10 @@
 import styles from '../../ui/dashboard/users/users.module.css'
 import Link from "next/link";
+import { fetchUsers } from '../../lib/data';
 
-const usersData = [
-    {
-        id: 1,
-        username: "John Doe",
-        email: "john.doe@example.com",
-        // createdAt: new Date("2022-01-01"),
-        role: "Admin",
-        accountType: "All",
-        firstName: "John",
-        lastName: "Doe",
-        phoneNumber: "019823223333"
-    },
-    {
-        id: 2,
-        username: "John Smith",
-        email: "smith.doe@example.com",
-        // createdAt: new Date("2022-01-01"),
-        role: "General User",
-        accountType: "Borrower",
-        firstName: "John",
-        lastName: "Smith",
-        phoneNumber: "019923223333"
-    }
-]
+const users = async() => {
+    const userList = await fetchUsers();
 
-const users = () => {
     return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -40,14 +18,15 @@ const users = () => {
           <tr>
             <td>First Name</td>
             <td>Last Name</td>
+            <td>Created Date</td>
             <td>Email</td>
             <td>Phone Number</td>
-            {/* <td>Role</td> */}
+            <td>Role</td>
             <td>Account Type</td>
           </tr>
         </thead>
         <tbody>
-          {usersData.map((user) => (
+          {userList.map((user) => (
             <tr key={user.id}>
               {/* <td>
                 <div className={styles.user}>
@@ -63,24 +42,25 @@ const users = () => {
               </td> */}
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
-              {/* <td>{user.createdAt?.toString().slice(4, 16)}</td> */}
+              <td>{user.createdAt?.toString().slice(4, 16)}</td>
               <td>{user.email}</td>
               <td>{user.phoneNumber}</td>
-              {/* <td>{user.role}</td> */}
+              <td>{user.role == "general_user" ? "General User" : "Admin" }</td>
               <td>{user.accountType}</td>
               <td>
                 <div className={styles.buttons}>
-                  <Link href={`/dashboard/users/${user.id}`}>
+                  {/* <Link href={`/dashboard/users/${user.id}`}>
                     <button className={`${styles.button} ${styles.view}`}>
                       View
                     </button>
-                  </Link>
-                  {/* <form action={deleteUser}>
+                  </Link> */}
+                  {/* action={deleteUser} */}
+                  <form >
                     <input type="hidden" name="id" value={(user.id)} />
                     <button className={`${styles.button} ${styles.delete}`}>
                       Delete
                     </button>
-                  </form> */}
+                  </form>
                 </div>
               </td>
             </tr>

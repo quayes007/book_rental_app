@@ -1,26 +1,10 @@
 import styles from '../../ui/dashboard/bookList/booList.module.css';
 import Link from "next/link";
+import { fetchBooks } from '../../lib/data';
 
-const books = [
-    {
-        id: 1,
-        title: "Book 1",
-        authorName: "Author 1",
-        availableForRent: true,
-        availableForSell: false,
-        price: 250
-    },
-    {
-        id: 2,
-        title: "Book 2",
-        authorName: "Author 2",
-        availableForRent: false,
-        availableForSell: true,
-        price: 250
-    }
-]
+const BookListPage = async() => {
+  const books = await fetchBooks();
 
-const BookListPage = () => {
     return (
         <div className={styles.container}>
         <div className={styles.top}>
@@ -55,12 +39,6 @@ const BookListPage = () => {
                         View
                       </button>
                     </Link>
-                    {/* <form action={deleteUser}>
-                      <input type="hidden" name="id" value={(user.id)} />
-                      <button className={`${styles.button} ${styles.delete}`}>
-                        Delete
-                      </button>
-                    </form> */}
                   </div>
                 </td>
               </tr>
