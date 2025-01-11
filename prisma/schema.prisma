@@ -49,7 +49,7 @@ model User {
   preferences  String[]
   borrowRequests BorrowRequest[]
   addresses Address[]
-  ordersBooks OrderBook[]
+  orderBooks OrderBook[]
 }
 
 model BookGeneres {
@@ -98,7 +98,7 @@ model Book {
 
 model BorrowRequest {
   id          Int           @id @default(autoincrement())
-  userId       Int           @unique
+  userId       Int           
   bookId       Int
   startDate     DateTime
   endDate       DateTime
@@ -112,10 +112,8 @@ model BorrowRequest {
 
 model OrderBook {
   id          Int           @id @default(autoincrement())
-  userId       Int           @unique
+  userId       Int          
   bookId       Int
-  startDate     DateTime
-  endDate       DateTime
   status        STATUS 
   createdAt DateTime @default(now())
   updatedAt     DateTime    @updatedAt
@@ -145,7 +143,7 @@ model Comment {
 
 model Address {
   id          Int           @id @default(autoincrement())
-  userId       Int         
+  userId       Int     
   street       String
   city         String?
   district        String

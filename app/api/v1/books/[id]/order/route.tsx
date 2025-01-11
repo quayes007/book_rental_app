@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma"
+import { STATUS } from '@prisma/client';
 import { NextResponse, NextRequest } from "next/server"
 import { middleware } from "../../../../../../middleware"; // Adjust path as needed
 import jwt from 'jsonwebtoken';
@@ -30,10 +31,33 @@ export const POST = async (request: NextRequest, { params }: { params: { id: str
         }
         
         const formData = await request.json()
+        const orderData = {
+            status: STATUS.in_process
+        }
+
+        const orderBook = await prisma.orderBook.create({
+            data: {
+                user: { connect: { id: user.id } },
+                book: { connect: { id: bookId } },
+                ...orderData
+            }
+        })
+
+        const address = await prisma.address.create({
+            data: {
+                street: formData.address.street_no,
+                city: formData.address.street_no,
+                zipCode: formData.address.post_code,
+                district: formData.address.district,
+                user: { connect: { id: user.id } },
+                orderBook: { connect: {id: orderBook.id}}
+            }
+        })
+
         return NextResponse.json({
             message: "Successfully book order is placed",
             code: 200,
-            data: formData
+            data: orderBook
           });
 
 
