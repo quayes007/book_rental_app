@@ -44,21 +44,21 @@ const menuItems = [
           },
       ],
     },
-    {
-      title: "User",
-      list: [
-        {
-          title: "Settings",
-          path: "/dashboard/settings",
-          icon: <MdOutlineSettings />,
-        },
-        {
-          title: "Help",
-          path: "/dashboard/help",
-          icon: <MdHelpCenter />,
-        },
-      ],
-    },
+    // {
+    //   title: "User",
+    //   list: [
+    //     {
+    //       title: "Settings",
+    //       path: "/dashboard/settings",
+    //       icon: <MdOutlineSettings />,
+    //     },
+    //     {
+    //       title: "Help",
+    //       path: "/dashboard/help",
+    //       icon: <MdHelpCenter />,
+    //     },
+    //   ],
+    // },
   ];
   
 const Sidebar = () => {
