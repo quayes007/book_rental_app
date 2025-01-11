@@ -16,6 +16,7 @@ const BookListPage = async() => {
         <table className={styles.table}>
           <thead>
             <tr>
+              <td>ID</td>
               <td>Title</td>
               <td>Author</td>
               <td>For Rent</td>
@@ -26,13 +27,14 @@ const BookListPage = async() => {
           <tbody>
             {books.map((book) => (
               <tr key={book.id}>
+                <td>{book.id}</td>
                 <td>{book.title}</td>
                 <td>{book.authorName}</td>
                 {/* <td>{user.createdAt?.toString().slice(4, 16)}</td> */}
                 <td>{book.availableForRent ? "Yes" : "No"}</td>
                 <td>{book.availableForSell ? "Yes" : "No"}</td>
                 <td>{book.price}</td>
-                <td>
+                {/* <td>
                   <div className={styles.buttons}>
                     <Link href={`/dashboard/books/${book.id}`}>
                       <button className={`${styles.button} ${styles.view}`}>
@@ -40,7 +42,7 @@ const BookListPage = async() => {
                       </button>
                     </Link>
                   </div>
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>

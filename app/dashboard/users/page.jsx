@@ -16,6 +16,7 @@ const users = async() => {
       <table className={styles.table}>
         <thead>
           <tr>
+            <td>ID</td>
             <td>First Name</td>
             <td>Last Name</td>
             <td>Created Date</td>
@@ -40,6 +41,7 @@ const users = async() => {
                   {user.username}
                 </div>
               </td> */}
+              <td>{user.id}</td>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
               <td>{user.createdAt?.toString().slice(4, 16)}</td>

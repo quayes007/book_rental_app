@@ -1,11 +1,10 @@
-// import { addUser } from "@/app/lib/actions";
+import { addBook } from "../../../lib/action";
 import styles from "../../../ui/dashboard/users/addUser/addUser.module.css";
 
 const AddBookPage = () => {
   return (
-    // action={addUser} 
     <div className={styles.container}>
-      <form className={styles.form}>
+      <form action={addBook} className={styles.form}>
         <input type="text" placeholder="title" name="title" required />
         <input type="text" placeholder="Author Name" name="authorName" required />
         <input type="number" placeholder="Rent per Day" name="rentPerDay" required />
