@@ -85,6 +85,32 @@ export const addBook = async (formData) => {
     revalidatePath("/dashboard/users");
     redirect("/dashboard/users");
   };
+
+  export const cancelRequest = async (formData) => {
+    const data = Object.fromEntries(formData);
+  
+    try {
+      if (!parseInt(data.id)) {
+        console.log('request id is needed')
+        throw new Error("Request ID is required");
+      }
+  
+      await prisma.borrowRequest.update({
+        where: {
+         id: parseInt(data.id)
+        },
+        data: {
+          status: 'cancelled',
+        },
+      });
+    } catch (err) {
+      console.log(err).message;
+      throw new Error("Failed to delete user!");
+    }
+  
+    revalidatePath("/dashboard/users");
+    redirect("/dashboard/users");
+  };
   
 
 // export const authenticate = async (prevState, formData) => {

@@ -1,5 +1,6 @@
 import styles from "./borrow.module.css";
 import Image from "next/image";
+import { cancelRequest } from "../../../lib/action"
 
 const Borrow = ({ item }) => {
   return (
@@ -10,6 +11,7 @@ const Borrow = ({ item }) => {
       <table className={styles.table}>
         <thead>
           <tr>
+            <td>ID</td>
             <td>Name</td>
             <td>Book Title</td>
             <td>From Date</td>
@@ -32,6 +34,7 @@ const Borrow = ({ item }) => {
                 {item?.name || "John Doe"}
               </div>
             </td>
+            <td>{item?.id || "1" }</td>
             <td>
               {item?.title || "Title" }
             </td>
@@ -42,6 +45,18 @@ const Borrow = ({ item }) => {
               <span className={`${styles.status} ${styles.pending}`}>
                 {item?.status || "Processing"}
               </span>
+            </td>
+            <td>
+            {
+              item && item?.status != 'cancelled' && (
+                <form action={cancelRequest}>
+                <input type="hidden" name="id" value={(item.id)} />
+                <button type="submit" className={`${styles.button} ${styles.delete}`}>
+                  Cancel
+                </button>
+            </form>
+              )
+            }
             </td>
           </tr>
         </tbody>

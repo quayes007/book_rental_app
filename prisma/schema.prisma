@@ -30,6 +30,7 @@ enum STATUS {
   in_rent
   returning
   complete
+  cancelled
 }
 
 model User {
