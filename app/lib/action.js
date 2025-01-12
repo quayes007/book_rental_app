@@ -108,8 +108,8 @@ export const addBook = async (formData) => {
       throw new Error("Failed to delete user!");
     }
   
-    revalidatePath("/dashboard/users");
-    redirect("/dashboard/users");
+    revalidatePath("/dashboard/borrow-list");
+    redirect("/dashboard/borrow-list");
   };
  
   export const signOut = async (formData) => {
