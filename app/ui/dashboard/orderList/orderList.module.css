@@ -45,5 +45,17 @@
 }
 
 .cancelled{
-  background-color: #f7737375;
+  background-color: #afd6ee75;
+}
+
+.delete{
+  background-color: crimson;
+}
+
+.button{
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
 }

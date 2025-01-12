@@ -111,6 +111,33 @@ export const addBook = async (formData) => {
     revalidatePath("/dashboard/borrow-list");
     redirect("/dashboard/borrow-list");
   };
+
+  export const processRequest = async (formData) => {
+    const data = Object.fromEntries(formData);
+  
+    try {
+      if (!parseInt(data.id)) {
+        console.log('request id is needed')
+        throw new Error("Request ID is required");
+      }
+  
+      await prisma.orderBook.update({
+        where: {
+         id: parseInt(data.id)
+        },
+        data: {
+          status: 'complete',
+        },
+      });
+    } catch (err) {
+      console.log(err).message;
+      throw new Error("Failed to update!");
+    }
+  
+    revalidatePath("/dashboard/order-list");
+    redirect("/dashboard/order-list");
+  };
+ 
  
   export const signOut = async (formData) => {
     redirect("/login");

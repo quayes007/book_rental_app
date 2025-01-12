@@ -1,22 +1,24 @@
 import OrderList from "../../ui/dashboard/orderList/orderList";
 import styles from "../../ui/dashboard/bookList/booList.module.css";
-import Link from "next/link";
+import { fetchOrderedBooks } from "../../lib/data"
 
-const bookOrders = [
-    {
-        id: 1,
-        user: {
-            name: "Smith Doe"
-        },
-        title: "Book 1",
-        price: 250,
-        platformCost: 13,
-        totalCost: 263,
-        status: "Processing"
-    }
-]
+// const bookOrders = [
+//     {
+//         id: 1,
+//         user: {
+//             name: "Smith Doe"
+//         },
+//         title: "Book 1",
+//         price: 250,
+//         platformCost: 13,
+//         totalCost: 263,
+//         status: "Processing"
+//     }
+// ]
 
-const OrderListPage = () => {
+const OrderListPage = async() => {
+    const bookOrders = await fetchOrderedBooks();
+
     return (
         <div className = {styles.container}>
             <div className={styles.top}>

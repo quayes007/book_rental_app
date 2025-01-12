@@ -47,21 +47,19 @@ export const fetchBorrowedBooks = async() => {
 
 export const fetchOrderedBooks = async() =>{
     try {
-        const orderedBooks = await prisma.orderedBook.findMany({
+        const orderedBooks = await prisma.orderBook.findMany({
             include: {
                 user: true,
                 book: true,
               },
         });
-        return orderedBooks.map(order => ({
+        return orderedBooks.map(bor => ({
             id: bor.id,
             title: bor.book.title,
-            startDate: bor.startDate.toISOString(),
-            endDate: bor.endDate.toISOString(),
-            rentPerDay: bor.rentPerDay,
+            price: bor.book.price,
             status: bor.status,
             user: {
-                name: bor.user.name
+                name: bor.user.firstName
             }
         }))
     }catch(e) {

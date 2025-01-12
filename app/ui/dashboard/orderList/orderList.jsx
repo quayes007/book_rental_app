@@ -1,5 +1,6 @@
 import styles from "./orderList.module.css";
 import Image from "next/image";
+import { processRequest } from "../../../lib/action"
 
 const OrderList = ({ item }) => {
   return (
@@ -10,6 +11,7 @@ const OrderList = ({ item }) => {
       <table className={styles.table}>
         <thead>
           <tr>
+            <td>ID</td>
             <td>Name</td>
             <td>Book Title</td>
             <td>Price</td>
@@ -20,6 +22,7 @@ const OrderList = ({ item }) => {
         </thead>
         <tbody>
           <tr>
+          <td>{item?.id || 1 }</td>
             <td>
               <div className={styles.user}>
                 <Image
@@ -32,6 +35,7 @@ const OrderList = ({ item }) => {
                 {item?.user?.name || "John Doe"}
               </div>
             </td>
+           
             <td>
               {item?.title || "Title"}
             </td>
@@ -42,6 +46,18 @@ const OrderList = ({ item }) => {
               <span className={`${styles.status} ${styles.pending}`}>
                 {item?.status || "Processing"}
               </span>
+            </td>
+            <td>
+            {
+              item && item?.status != 'complete' && (
+                <form action={processRequest}>
+                  <input type="hidden" name="id" value={(item.id)} />
+                  <button type="submit" className={`${styles.button} ${styles.delete}`}>
+                    Complete
+                  </button>
+                </form>
+              )
+            }
             </td>
           </tr>
         </tbody>
