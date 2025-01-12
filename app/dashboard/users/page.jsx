@@ -1,6 +1,7 @@
 import styles from '../../ui/dashboard/users/users.module.css'
 import Link from "next/link";
 import { fetchUsers } from '../../lib/data';
+import { deleteUser } from '../../lib/action'
 
 const users = async() => {
     const userList = await fetchUsers();
@@ -57,9 +58,9 @@ const users = async() => {
                     </button>
                   </Link> */}
                   {/* action={deleteUser} */}
-                  <form >
+                  <form action={deleteUser}>
                     <input type="hidden" name="id" value={(user.id)} />
-                    <button className={`${styles.button} ${styles.delete}`}>
+                    <button type="submit" className={`${styles.button} ${styles.delete}`}>
                       Delete
                     </button>
                   </form>

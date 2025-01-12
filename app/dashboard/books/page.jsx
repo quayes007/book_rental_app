@@ -34,15 +34,6 @@ const BookListPage = async() => {
                 <td>{book.availableForRent ? "Yes" : "No"}</td>
                 <td>{book.availableForSell ? "Yes" : "No"}</td>
                 <td>{book.price}</td>
-                {/* <td>
-                  <div className={styles.buttons}>
-                    <Link href={`/dashboard/books/${book.id}`}>
-                      <button className={`${styles.button} ${styles.view}`}>
-                        View
-                      </button>
-                    </Link>
-                  </div>
-                </td> */}
               </tr>
             ))}
           </tbody>

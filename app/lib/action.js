@@ -62,6 +62,29 @@ export const addBook = async (formData) => {
     revalidatePath("/dashboard/books");
     redirect("/dashboard/books");
   };
+
+  export const deleteUser = async (formData) => {
+    const data = Object.fromEntries(formData);
+  
+    try {
+      if (!parseInt(data.id)) {
+        console.log('user id is needed')
+        throw new Error("User ID is required");
+      }
+  
+      await prisma.user.delete({
+        where: {
+          id: parseInt(data.id)
+        }
+      });
+    } catch (err) {
+      console.log(err).message;
+      throw new Error("Failed to delete user!");
+    }
+  
+    revalidatePath("/dashboard/users");
+    redirect("/dashboard/users");
+  };
   
 
 // export const authenticate = async (prevState, formData) => {
