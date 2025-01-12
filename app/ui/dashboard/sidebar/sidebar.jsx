@@ -11,6 +11,7 @@ import {
     MdLogout,
   } from "react-icons/md";
 import { FaBookOpen, FaBookReader } from "react-icons/fa";
+import {signOut} from '../../../lib/action'
 
 
 const menuItems = [
@@ -87,10 +88,14 @@ const Sidebar = () => {
                     </li>
                 ))}
         </ul>
-        <button className={styles.logout}>
-            <MdLogout />
-            Logout
-          </button>
+        <form
+        action={signOut}
+        >
+        <button type = "submit" className={styles.logout}>
+          <MdLogout />
+          Logout
+        </button>
+      </form>
         </div>
     )
 }

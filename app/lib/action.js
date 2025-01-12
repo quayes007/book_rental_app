@@ -111,6 +111,14 @@ export const addBook = async (formData) => {
     revalidatePath("/dashboard/users");
     redirect("/dashboard/users");
   };
+ 
+  export const signOut = async (formData) => {
+    redirect("/login");
+  }
+
+  export const login = async (formData) => {
+    redirect("/dashboard");
+  }
   
 
 // export const authenticate = async (prevState, formData) => {
